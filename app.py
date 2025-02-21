@@ -119,7 +119,8 @@ with gb_col:
 
 # (6) Apply Aggregation & Groupby
 x = gb_options_dict[gb_selected][0]
-df_plot: pd.DataFrame = gb_options_dict[gb_selected][1](df._get_numeric_data()) if gb_selected else df
+df_plot: pd.DataFrame = gb_options_dict[gb_selected][1](df) if gb_selected else df
+df_plot = df_plot._get_numeric_data()
 top_n = None
 size = df_plot.size()
 if gb_selected == "Company":
