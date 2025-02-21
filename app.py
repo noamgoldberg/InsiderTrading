@@ -125,7 +125,7 @@ size = df_plot.size()
 if gb_selected == "Company":
     top_n = st.slider("Show Top # Companies", min_value=5, max_value=min(size.shape[0], 100), value=25, step=5)
 if aggregation_option == "Total":
-    df_plot: pd.Series = df_plot.sum().iloc[:, 0]
+    df_plot: pd.Series = df_plot._get_numeric_data().sum().iloc[:, 0]
 else:
     df_plot: pd.Series = size
 df_plot: pd.DataFrame = df_plot.reset_index()
