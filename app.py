@@ -6,7 +6,8 @@ import plotly.express as px
 
 from core.query_agent import QueryAgent
 from core.parameters.job_titles import JobTitlesParam
-    
+
+from streamlit_app.plot import plot_trade_chart    
 
 def display_active_filters(
     *,
@@ -141,58 +142,14 @@ display_active_filters(
     trade_val_min=trade_val_min,
     trade_val_max=trade_val_max,
 )
-temporal_gbs = ["Year", "Month", "Day"]
-# if gb_selected in ["Year", "Day"]:
-# # if gb_selected in ["Year", "Month"]:
-#     df_plot.sort_values(by=x)
-#     fig = px.line(
-#         df_plot,
-#         x=x,
-#         y=aggregation_option,
-#         title=f"{aggregation_option} of Trades Over Time",
-#         labels={x: gb_selected, aggregation_option: aggregation_option},
-#     )
-if gb_selected in temporal_gbs:
-    df_plot.sort_values(by=x, inplace=True)
-    if gb_selected == "Month":
-        df_plot[x] = df_plot[x].astype(str)  # Ensure categorical ordering
-        fig = px.bar(
-            df_plot,
-            x=x,
-            y=aggregation_option,
-            title=f"{aggregation_option} of Trades Over Time",
-            labels={x: gb_selected, aggregation_option: aggregation_option},
-        )
-        fig.update_xaxes(
-            type="category"  # Prevents unnecessary intermediate months
-        )
-    else:
-        fig = px.line(
-            df_plot,
-            x=x,
-            y=aggregation_option,
-            title=f"{aggregation_option} of Trades Over Time",
-            labels={x: gb_selected, aggregation_option: aggregation_option},
-        )
-else:
-    if top_n:
-        df_plot = df_plot.head(top_n)
-    orientation = "v"
-    if gb_selected not in ["Year"]:
-        orientation = 'h'
-    fig = px.bar(
-        df_plot.sort_values(by=aggregation_option, ascending=True),
-        x=aggregation_option,
-        y=x,
-        title=f"{aggregation_option} of Trades by {gb_selected} (Top {top_n})",
-        labels={x: gb_selected, aggregation_option: aggregation_option},
-        orientation=orientation,
-    )
-    chart_height = max(400, 40 + df_plot.shape[0] * 20)
-    fig.update_layout(
-        height=chart_height
-    )
-st.plotly_chart(fig)
+plot_trade_chart(
+    df_plot=df_plot,
+    x=x,
+    y=aggregation_option,
+    groupby=gb_selected,
+    top_n=top_n,
+)
+
 df_display = df.copy()
 def format_dollar_amt(amt: Union[int, float], decimals: int = 2) -> str:
     sym = '-' if amt < 0 else ''
