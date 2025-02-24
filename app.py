@@ -117,7 +117,6 @@ st.subheader("All Trades")
 st.dataframe(df_display)
 display_legend_footnotes()
 
-# 2. fix sorting of companies in bar chart (top 25 is alphabetical)
 # 3. bubble chart
 # 4. clear filters button
 # 5. filter sets (i.e. last 5 weeks)
