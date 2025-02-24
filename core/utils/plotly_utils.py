@@ -24,10 +24,12 @@ def create_time_series_chart(df_plot, x, aggregation_option, gb_selected) -> go.
 def create_categorical_chart(df_plot, x, aggregation_option, gb_selected, top_n) -> go.Figure:
     """Generates a bar chart for categorical groupings."""
     if top_n:
-        df_plot = df_plot.head(top_n)
+        df_plot = df_plot.sort_values(by=aggregation_option, ascending=False).head(top_n)
+    df_plot = df_plot.sort_values(by=aggregation_option, ascending=True)
+    df_plot.sort_values(by=aggregation_option, ascending=False)
     orientation = "h" if gb_selected not in ["Year"] else "v"
     fig = px.bar(
-        df_plot.sort_values(by=aggregation_option, ascending=True),
+        df_plot,
         x=aggregation_option, y=x,
         title=f"{aggregation_option} of Trades by {gb_selected} (Top {top_n})",
         labels={x: gb_selected, aggregation_option: aggregation_option},

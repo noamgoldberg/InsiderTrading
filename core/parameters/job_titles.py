@@ -1,6 +1,6 @@
 from typing import List, Union, Optional
 
-from core.utils import validate_list_str_param
+from core.parameters.validate import validate_list_str_param
 
 
 class JobTitlesParam:

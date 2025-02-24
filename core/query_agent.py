@@ -30,7 +30,7 @@ class QueryAgent:
         job_titles: Optional[Union[str, List[str]]] = None,
         trade_val_min: Optional[int] = None,
         trade_val_max: Optional[int] = None,
-    ) -> Optional[pd.DataFrame]:
+    ) -> None | pd.DataFrame:
         """Returns cached data if the current query is fully contained in an existing dataset."""
         job_titles = job_titles or []  # Ensure job_titles is a list
         print(f"[{get_current_time()}] Checking cache for job_titles={job_titles}, "
