@@ -19,7 +19,7 @@ def plot_trade_chart(
         fig = create_time_series_chart(
             df_plot=df_plot,
             x=x,
-            y=aggregation,
+            aggregation=aggregation,
             groupby=groupby,
             title=title
         )
@@ -27,7 +27,7 @@ def plot_trade_chart(
         fig = create_categorical_chart(
             df_plot=df_plot,
             x=x,
-            y=aggregation,
+            aggregation=aggregation,
             groupby=groupby,
             top_n=top_n,
             title=title

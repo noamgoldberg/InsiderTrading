@@ -15,7 +15,7 @@ from streamlit_app.filters import (
     display_active_filters
 )
 from streamlit_app.footnotes import display_legend_footnotes
-from streamlit_app.group_and_agg import extract_gb_and_agg, apply_gb_and_agg
+from streamlit_app.groupby_aggregate import extract_gb_and_agg, apply_gb_and_agg
 from streamlit_app.plot import plot_trade_chart
 
 
