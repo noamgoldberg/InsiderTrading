@@ -9,14 +9,28 @@ from consts import TEMPORAL_GBS
 def plot_trade_chart(
     df_plot: pd.DataFrame,
     x: str,
-    y: str,
+    aggregation: str,
     groupby: str,
     top_n: int = None
 ) -> go.Figure:
     """Determines the appropriate chart type and renders it."""
+    title = f"{aggregation} of Trades Over Time".replace('Total of', 'Total')
     if groupby in TEMPORAL_GBS:
-        fig = create_time_series_chart(df_plot, x, y, groupby)
+        fig = create_time_series_chart(
+            df_plot=df_plot,
+            x=x,
+            y=aggregation,
+            groupby=groupby,
+            title=title
+        )
     else:
-        fig = create_categorical_chart(df_plot, x, y, groupby, top_n)
+        fig = create_categorical_chart(
+            df_plot=df_plot,
+            x=x,
+            y=aggregation,
+            groupby=groupby,
+            top_n=top_n,
+            title=title
+        )
     st.plotly_chart(fig)
     return fig
