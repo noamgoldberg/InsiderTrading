@@ -7,8 +7,12 @@ import numpy as np
 GROUPBY_OPTIONS_DICT = {
     "Company": ("Company Name", lambda df: df.groupby("Company Name")),
     "Day": ("Trade Date", lambda df: df.groupby("Trade Date")),
-    "Month": ("Trade Date", lambda df: df.groupby(df["Trade Date"].dt.to_period("M").astype(str).astype("category"))),
-    "Year": ("Trade Date", lambda df: df.groupby(df["Trade Date"].dt.year.astype(int))),
+    "Month": ("Trade Date", lambda df: df.groupby(
+        df["Trade Date"].astype("datetime64[ns]").dt.to_period("M").astype(str).astype("category")
+    )),
+    "Year": ("Trade Date", lambda df: df.groupby(
+        df["Trade Date"].astype("datetime64[ns]").dt.year.astype(int)
+    )),
 }
 
 AGGREGATIONS = {
