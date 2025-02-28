@@ -1,40 +1,41 @@
 from typing import Dict, List, Any
 import streamlit as st
 import pandas as pd
+from streamlit.delta_generator import DeltaGenerator
 
 from open_insider.parameters.job_titles import JobTitlesParam
 from open_insider.query_agent import QueryAgent
 
 from streamlit_app.active import set_active_dataset_and_params
 
-
 def display_and_extract_filters(
+    *,
     default_dataset: pd.DataFrame,
     trade_val_step: int = 50000,
-    trade_val_round: int = -9
+    trade_val_round: int = -9,
+    popover: DeltaGenerator = None
 ) -> Dict[str, Any]:
-    st.sidebar.header("Filters")
+    popover.write("##### Select Filters")
     all_trade_types = default_dataset['Trade Type'].unique()
     all_job_titles = list(JobTitlesParam.JOB_TITLE_MAP.keys())
     all_insiders = default_dataset['Insider Name'].unique()
     all_companies = default_dataset['Company Name'].unique()
-
     default_trade_types = ["P - Purchase", "S - Sale"]
-    selected_trade_types = st.sidebar.multiselect(
+    selected_trade_types = popover.multiselect(
         "Select Trade Types",
         all_trade_types,
         default=[tt for tt in default_trade_types if tt in all_trade_types]
     )
-    selected_job_titles = st.sidebar.multiselect("Select Job Titles", all_job_titles)
-    selected_insiders = st.sidebar.multiselect("Select Insiders", all_insiders)
-    selected_companies = st.sidebar.multiselect("Select Companies", all_companies)
-    selected_trade_val_min = st.sidebar.number_input(
+    selected_job_titles = popover.multiselect("Select Job Titles", all_job_titles)
+    selected_insiders = popover.multiselect("Select Insiders", all_insiders)
+    selected_companies = popover.multiselect("Select Companies", all_companies)
+    selected_trade_val_min = popover.number_input(
         "Min Trade Value",
         min_value=0,
         value=int(round(default_dataset['Value'].abs().min(), trade_val_round)),
         step=trade_val_step
     )
-    selected_trade_val_max = st.sidebar.number_input(
+    selected_trade_val_max = popover.number_input(
         "Max Trade Value",
         min_value=0,
         value=int(round(default_dataset['Value'].abs().max(), trade_val_round)),
@@ -53,9 +54,10 @@ def apply_filters(
     *,
     query_agent: QueryAgent,
     selected_filters: Dict[str, Any],
-    max_rows: int = 5000
+    max_rows: int = 5000,
+    apply_filters: bool
 ) -> None:
-    if st.sidebar.button("Apply Filters"):
+    if apply_filters:
         if st.session_state["active"]["params"] == selected_filters:
             set_active_dataset_and_params(
                 dataset_name="default",

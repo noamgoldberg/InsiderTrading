@@ -28,7 +28,6 @@ def get_aggregation() -> str:
     return st.selectbox("Aggregation Type", list(AGGREGATIONS.keys()), index=0)
 
 def extract_gb_and_agg() -> Tuple[str, str]:
-    st.write("### Trade Trends & Insights")
     gb_col, agg_col = st.columns(2)
     with gb_col:
         groupby = get_groupby()
