@@ -2,7 +2,7 @@ import pandas as pd
 import streamlit as st
 import plotly.graph_objects as go
 
-from core.utils.plotly_utils import create_categorical_chart, create_time_series_chart
+from utils.plotly_utils import create_categorical_chart, create_time_series_chart
 from consts import TEMPORAL_GBS
 
 

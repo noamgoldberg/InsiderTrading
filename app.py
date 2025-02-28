@@ -2,7 +2,7 @@ from typing import Union
 import streamlit as st
 import numpy as np
 
-from core.query_agent import QueryAgent
+from open_insider.query_agent import QueryAgent
 
 from streamlit_app.active import (
     get_active_dataset,

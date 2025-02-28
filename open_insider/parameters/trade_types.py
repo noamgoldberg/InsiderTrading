@@ -1,6 +1,6 @@
 from typing import List, Union, Optional
 
-from core.parameters.validate import validate_list_str_param
+from open_insider.parameters.validate import validate_list_str_param
 
 
 class TradeTypesParam:

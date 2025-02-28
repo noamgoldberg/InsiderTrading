@@ -1,8 +1,8 @@
 from typing import List, Union, Optional
 
-from core.parameters.job_titles import JobTitlesParam
-from core.parameters.num_results import NumResultsParam
-from core.parameters.trade_value import TradeValueParams
+from open_insider.parameters.job_titles import JobTitlesParam
+from open_insider.parameters.num_results import NumResultsParam
+from open_insider.parameters.trade_value import TradeValueParams
 from consts import OI_URL
 
 

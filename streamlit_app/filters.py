@@ -2,8 +2,8 @@ from typing import Dict, List, Any
 import streamlit as st
 import pandas as pd
 
-from core.parameters.job_titles import JobTitlesParam
-from core.query_agent import QueryAgent
+from open_insider.parameters.job_titles import JobTitlesParam
+from open_insider.query_agent import QueryAgent
 
 from streamlit_app.active import set_active_dataset_and_params
 

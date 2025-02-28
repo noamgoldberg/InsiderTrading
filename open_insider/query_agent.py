@@ -3,8 +3,8 @@ from typing import Dict, Any, List, Union, Optional
 import pandas as pd
 import numpy as np
 
-from core.query import Query
-from core.parameters.trade_types import TradeTypesParam
+from open_insider.query import Query
+from open_insider.parameters.trade_types import TradeTypesParam
 
 
 def get_current_time() -> str:
