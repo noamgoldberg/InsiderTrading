@@ -17,7 +17,7 @@ def plot_trade_chart(
     title = f"{aggregation} of Trades Over Time".replace('Total of', 'Total')
     if groupby in TEMPORAL_GBS:
         fig = create_time_series_chart(
-            df_plot=df_plot,
+            df=df_plot,
             x=x,
             aggregation=aggregation,
             groupby=groupby,
@@ -25,7 +25,7 @@ def plot_trade_chart(
         )
     else:
         fig = create_categorical_chart(
-            df_plot=df_plot,
+            df=df_plot,
             x=x,
             aggregation=aggregation,
             groupby=groupby,
